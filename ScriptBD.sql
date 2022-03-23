@@ -22,10 +22,9 @@ CREATE TABLE Cliente(
     Telefono VARCHAR2(15) NOT NULL,
     Tarjeta VARCHAR2(50) NOT NULL,
     Edad INTEGER NOT NULL,
-    Salario FLOAT(2) NOT NULL,
+    Salario INTEGER NOT NULL,
     Genero VARCHAR2(2) NOT NULL,
     id_pais INTEGER NOT NULL
-
 );
 ALTER TABLE Cliente ADD CONSTRAINT Cliente_PK PRIMARY KEY ( id_cliente );
 ALTER TABLE Cliente ADD CONSTRAINT Pais_Cliente_FK FOREIGN KEY ( id_pais )
@@ -41,7 +40,7 @@ ALTER TABLE Categoria ADD CONSTRAINT Categoria_PK PRIMARY KEY ( id_categoria );
 CREATE TABLE Producto(
     id_producto INTEGER NOT NULL,
     Nombre VARCHAR2(150) NOT NULL,
-    Precio FLOAT(2)	NOT NULL,
+    Precio NUMBER(10,2)	NOT NULL,
     id_Categoria INTEGER NOT NULL
 );
 
@@ -56,10 +55,9 @@ CREATE TABLE Orden(
     fecha_orden DATE NOT NULL,
     id_producto INTEGER NOT NULL,
     id_vendor INTEGER NOT NULL,
-    id_cliente INTEGER NOT NULL
+    id_cliente INTEGER NOT NULL,
+    PRIMARY KEY ( id_producto, linea_orden )
 );
-
-ALTER TABLE Orden ADD CONSTRAINT Orden_PK PRIMARY KEY ( id_producto );
 ALTER TABLE Orden ADD CONSTRAINT Producto_Orden_FK FOREIGN KEY ( id_producto )
         REFERENCES Producto ( id_producto );
 ALTER TABLE Orden ADD CONSTRAINT Vendedor_Orden_FK FOREIGN KEY ( id_vendor)
